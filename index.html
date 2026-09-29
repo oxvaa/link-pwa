@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f6f4">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="LINK">
+  <meta name="description" content="LINK — soukromé zprávy a lidé, na kterých záleží.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <title>LINK — Zprávy</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="brand" aria-label="LINK — domů" data-action="home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span></span>
+        <span>LINK</span>
+      </button>
+      <div class="top-actions">
+        <button class="icon-button" aria-label="Nainstalovat aplikaci" data-action="install-help" title="Přidat na plochu">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 17v3h14v-3"/></svg>
+        </button>
+        <button class="avatar avatar-self" aria-label="Otevřít profil" data-tab="profile">Š</button>
+      </div>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <section class="screen active" id="chats-screen" aria-labelledby="page-title">
+        <div class="page-heading">
+          <div><p class="eyebrow">VAŠE LIDÉ</p><h1 id="page-title">Zprávy</h1></div>
+          <button class="compose-button" aria-label="Nová zpráva" data-action="new-message"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.2 4.2"/></svg>
+          <input id="search" type="search" placeholder="Hledat v LINKu" autocomplete="off" aria-label="Hledat konverzace">
+          <kbd>⌘ K</kbd>
+        </div>
+
+        <section class="notes-block" aria-label="Poznámky">
+          <div class="section-label"><span>Poznámky</span><span class="muted">Sdílejte malý moment</span></div>
+          <div class="notes-row" id="notes-row">
+            <button class="note-card own-note" data-action="add-note">
+              <span class="note-avatar"><span>＋</span></span><span class="note-name">Vaše poznámka</span>
+            </button>
+            <button class="note-card" data-note="Na kafe? ☕"><span class="note-avatar note-photo tone-blue">E</span><span class="note-bubble">Na kafe? ☕</span><span class="note-name">Ema</span></button>
+            <button class="note-card" data-note="Nový track venku 🎧"><span class="note-avatar note-photo tone-purple">M</span><span class="note-bubble">Nový track venku 🎧</span><span class="note-name">Matěj</span></button>
+            <button class="note-card" data-note="Dneska mimo 🌿"><span class="note-avatar note-photo tone-orange">K</span><span class="note-bubble">Dneska mimo 🌿</span><span class="note-name">Klára</span></button>
+          </div>
+        </section>
+
+        <div class="list-heading"><h2>Poslední</h2><button class="text-button" data-action="filter-unread">Všechny <span>⌄</span></button></div>
+        <div class="chat-list" id="chat-list" aria-live="polite"></div>
+        <div class="empty-state hidden" id="empty-state"><span class="empty-mark">⌕</span><strong>Nikoho jsme nenašli</strong><p>Zkuste jiné jméno nebo zprávu.</p></div>
+        <p class="end-note">Vaše konverzace, v klidu a na jednom místě.</p>
+      </section>
+
+      <section class="screen" id="moments-screen" aria-labelledby="moments-title">
+        <div class="page-heading"><div><p class="eyebrow">OD LIDÍ, KTERÉ ZNÁTE</p><h1 id="moments-title">Momenty</h1></div><button class="compose-button" data-action="add-moment" aria-label="Přidat moment"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>
+        <div class="moments-intro"><div class="sparkle">✳</div><h2>Malé věci.<br>Blízcí lidé.</h2><p>Momentky od vašich přátel. Bez hluku, jen to, co stojí za sdílení.</p><button class="primary-button" data-action="add-moment">Přidat moment <span>↗</span></button></div>
+        <div class="moment-feed" id="moment-feed"></div>
+      </section>
+
+      <section class="screen" id="profile-screen" aria-labelledby="profile-title">
+        <div class="profile-top"><p class="eyebrow">VÁŠ PROSTOR</p><div class="profile-avatar">Š</div><h1 id="profile-title">Šimi</h1><p class="handle">@simi</p><p class="profile-line">Tady jste vždycky doma.</p></div>
+        <div class="settings-card">
+          <button class="settings-row" data-action="edit-profile"><span class="setting-icon">✳</span><span><strong>Upravit profil</strong><small>Jméno, fotka a váš status</small></span><b>›</b></button>
+          <button class="settings-row" data-action="privacy"><span class="setting-icon">◉</span><span><strong>Soukromí</strong><small>Rozhodujete, kdo vás najde</small></span><b>›</b></button>
+          <button class="settings-row" data-action="install-help"><span class="setting-icon">⌂</span><span><strong>Přidat LINK na plochu</strong><small>Otevře se jako vlastní aplikace</small></span><b>›</b></button>
+          <button class="settings-row" data-action="about"><span class="setting-icon">∞</span><span><strong>O aplikaci LINK</strong><small>Jednoduše blíž</small></span><b>›</b></button>
+        </div>
+        <p class="version-label">LINK · PREVIEW 1.0</p>
+      </section>
+    </main>
+
+    <nav class="tabbar" aria-label="Hlavní navigace">
+      <button class="tab active" data-tab="chats" aria-label="Zprávy"><svg viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H5l1.8-3.1A7.5 7.5 0 1 1 20 11.5Z"/><path d="M8 11.5h.01M12 11.5h.01M16 11.5h.01"/></svg><span>Zprávy</span></button>
+      <button class="tab" data-tab="moments" aria-label="Momenty"><svg viewBox="0 0 24 24"><path d="M12 3.5 14 9l5.5 2-5.5 2-2 5.5L10 13l-5.5-2L10 9l2-5.5Z"/><path d="m19 15 .9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15Z"/></svg><span>Momenty</span></button>
+      <button class="tab" data-tab="profile" aria-label="Profil"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.5-3.4 2.8-5 6.5-5s6 1.6 6.5 5"/></svg><span>Profil</span></button>
+    </nav>
+  </div>
+
+  <div class="chat-overlay" id="chat-overlay" aria-hidden="true">
+    <header class="chat-header"><button class="back-button" data-action="close-chat" aria-label="Zpět"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button><div class="chat-person"><span class="avatar" id="chat-avatar">E</span><span><strong id="chat-name">Ema</strong><small id="chat-status">Aktivní nyní</small></span></div><button class="icon-button" data-action="chat-info" aria-label="Informace o chatu"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg></button></header>
+    <div class="messages" id="messages"></div>
+    <form class="message-form" id="message-form"><button type="button" class="attach-button" data-action="attach" aria-label="Přidat přílohu">＋</button><label class="sr-only" for="message-input">Zpráva</label><input id="message-input" placeholder="Napište zprávu…" autocomplete="off"><button class="send-button" type="submit" aria-label="Odeslat"><svg viewBox="0 0 24 24"><path d="m4 11 16-7-7 16-2.5-6.5L4 11Z"/><path d="m10.5 13.5 4-4"/></svg></button></form>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <dialog id="modal" class="modal"><form method="dialog"><button class="modal-close" aria-label="Zavřít">×</button></form><div class="modal-icon" id="modal-icon">✳</div><p class="eyebrow" id="modal-eyebrow">LINK</p><h2 id="modal-title">Buďte blíž.</h2><p id="modal-copy">Soukromý prostor pro lidi, na kterých záleží.</p><div id="modal-extra"></div><button class="primary-button modal-done" data-action="modal-close">Rozumím <span>↗</span></button></dialog>
+  <script src="app.js" defer></script>
+</body>
+</html>
